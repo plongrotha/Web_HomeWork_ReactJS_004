@@ -2,12 +2,33 @@ import { EllipsisVertical } from "lucide-react";
 import React from "react";
 
 export default function CardComponent({ card }) {
+  const getProgressColor = (process) => {
+    return process < 30
+      ? "bg-red-500"
+      : process < 70
+      ? "bg-yellow-500"
+      : "bg-green-500";
+  };
+
+  const getDueDateColor = (dueDate) => {
+    const daysLeft = Math.ceil(
+      (new Date(dueDate) - new Date()) / (1000 * 60 * 60 * 24)
+    );
+    return daysLeft < 3
+      ? "text-red-500"
+      : daysLeft < 7
+      ? "text-yellow-500"
+      : "color-custom-sky-blue";
+  };
+
   return (
     <div>
       <div className="max-w-sm p-6 bg-white rounded-2xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
         <div className="flex justify-between mb-5">
           {/* date */}
-          <p className={`text-custom-sky-blue font-medium`}>{card.dueDate}</p>
+          <p className={`font-medium ${getDueDateColor(card.dueDate)}`}>
+            {card.dueDate}
+          </p>
           <EllipsisVertical size={20} color="#374957" />
         </div>
 
@@ -25,7 +46,7 @@ export default function CardComponent({ card }) {
         </div>
         <div className="relative mb-5 w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
           <div
-            className="bg-custom-sky-blue h-2.5 rounded-full"
+            className={`h-2.5 rounded-full ${getProgressColor(card.process)}`}
             style={{ width: `${card.process}%` }}
           ></div>
         </div>
