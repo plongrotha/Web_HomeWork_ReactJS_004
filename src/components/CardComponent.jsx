@@ -14,15 +14,22 @@ export default function CardComponent({ card }) {
   const defaultDescription =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
   const getDueDateColor = (process) => {
-    if (process == 100) {
-      return "text-custom-sky-blue";
-    } else if (process < 30) {
-      return "text-red-500";
-    } else if (process < 70) {
-      return "text-amber-300";
-    } else {
-      return "text-yellow-500";
-    }
+    // if (process == 100) {
+    //   return "text-custom-sky-blue";
+    // } else if (process < 30) {
+    //   return "text-red-500";
+    // } else if (process < 70) {
+    //   return "text-amber-300";
+    // } else {
+    //   return "text-yellow-500";
+    // }
+    return process === 100
+      ? "text-custom-sky-blue"
+      : process < 30
+      ? "text-red-500"
+      : process < 70
+      ? "text-amber-300"
+      : "text-yellow-500";
   };
 
   return (

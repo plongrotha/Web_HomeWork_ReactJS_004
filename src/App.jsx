@@ -11,18 +11,22 @@ import TopNavbarComponent from "./components/TopNavbarComponent";
 export default function App() {
   const [cards, setCards] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-
   const handleSearch = (searchInput) => {
     setSearchTerm(searchInput);
   };
 
+  const filteredCards = cards.filter((card) =>
+    card.projectName?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  console.log(filteredCards);
   return (
     <>
       <div className="bg-gray-300 flex ">
         <SidebarComponent />
         <div className="flex w-full justify-between">
-          <div className="w-full  p-2">
+          <div className="w-full p-2">
             <div className="items-center">
+              {/* search nh tver ot jenh te Teacher */}
               <TopNavbarComponent onSearch={handleSearch} />
             </div>
 
@@ -35,11 +39,11 @@ export default function App() {
                     <AddNewProjectComponent setCards={setCards} />
                   </div>
 
-                  <div className="grid grid-cols-2 gap-6 mt-6 h-[55vh]  border-2 overflow-scroll">
+                  <div className="grid grid-cols-2 gap-6 mt-6 h-[55vh]  overflow-scroll">
                     {cards
                       .filter((card) =>
                         card.projectName
-                          .toLowerCase()
+                          ?.toLowerCase()
                           .includes(searchTerm.toLowerCase())
                       )
                       .map((card, i) => (
@@ -49,9 +53,6 @@ export default function App() {
                 </div>
 
                 <div className="w-[200px] flex-1 pl-[20px] mt-2">
-                  {/* <div className="flex flex-1 border-2">
-                    <FilterComponent />
-                  </div> */}
                   <div>
                     <LearningMaterialsComponent />
                   </div>
