@@ -12,7 +12,7 @@ export default function CardComponent({ card }) {
         </div>
 
         <h5 className="capitalize mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-          {card.prjectName}
+          {card.projectName}
         </h5>
         <p className="line-clamp-2 mb-3 font-normal text-justify text-gray-400 dark:text-gray-400">
           {card.describtion}

@@ -164,16 +164,6 @@ export default function AddNewProjectComponent({ setCards }) {
           </div>
         </div>
       </div>
-
-      {/* {cards.map((card, i) => (
-        <CardComponent
-          key={i}
-          projectName={card.projectName}
-          dueDate={card.dueDate}
-          process={card.process}
-          describtion={card.describtion}
-        />
-      ))} */}
     </div>
   );
 }
