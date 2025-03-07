@@ -7,8 +7,15 @@ import DashboardComponent from "./components/DashboardComponent";
 import LearningMaterialsComponent from "./components/LearningMaterialsComponent";
 import SidebarComponent from "./components/SidebarComponent";
 import TopNavbarComponent from "./components/TopNavbarComponent";
+
 export default function App() {
   const [cards, setCards] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (searchInput) => {
+    setSearchTerm(searchInput);
+  };
+
   return (
     <>
       <div className="bg-gray-300 flex ">
@@ -16,7 +23,7 @@ export default function App() {
         <div className="flex w-full justify-between">
           <div className="w-full  p-2">
             <div className="items-center">
-              <TopNavbarComponent />
+              <TopNavbarComponent onSearch={handleSearch} />
             </div>
 
             <div className="flex">
@@ -29,9 +36,15 @@ export default function App() {
                   </div>
 
                   <div className="grid grid-cols-2 gap-6 mt-6 h-[55vh]  border-2 overflow-scroll">
-                    {cards.map((card, i) => (
-                      <CardComponent key={i} card={card} />
-                    ))}
+                    {cards
+                      .filter((card) =>
+                        card.projectName
+                          .toLowerCase()
+                          .includes(searchTerm.toLowerCase())
+                      )
+                      .map((card, i) => (
+                        <CardComponent key={i} card={card} />
+                      ))}
                   </div>
                 </div>
 

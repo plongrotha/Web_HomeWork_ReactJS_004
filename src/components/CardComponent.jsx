@@ -3,30 +3,34 @@ import React from "react";
 
 export default function CardComponent({ card }) {
   const getProgressColor = (process) => {
-    return process < 30
+    return process == 100
+      ? "bg-custom-sky-blue"
+      : process < 30
       ? "bg-red-500"
       : process < 70
-      ? "bg-yellow-500"
-      : "bg-green-500";
+      ? "bg-amber-300"
+      : "bg-yellow-500";
   };
-
-  const getDueDateColor = (dueDate) => {
-    const daysLeft = Math.ceil(
-      (new Date(dueDate) - new Date()) / (1000 * 60 * 60 * 24)
-    );
-    return daysLeft < 3
-      ? "text-red-500"
-      : daysLeft < 7
-      ? "text-yellow-500"
-      : "color-custom-sky-blue";
+  const defaultDescription =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+  const getDueDateColor = (process) => {
+    if (process == 100) {
+      return "text-custom-sky-blue";
+    } else if (process < 30) {
+      return "text-red-500";
+    } else if (process < 70) {
+      return "text-amber-300";
+    } else {
+      return "text-yellow-500";
+    }
   };
 
   return (
     <div>
       <div className="max-w-sm p-6 bg-white rounded-2xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
-        <div className="flex justify-between mb-5">
+        <div className="flex   justify-between mb-5">
           {/* date */}
-          <p className={`font-medium ${getDueDateColor(card.dueDate)}`}>
+          <p className={`font-medium ${getDueDateColor(card.process)}`}>
             {card.dueDate}
           </p>
           <EllipsisVertical size={20} color="#374957" />
@@ -36,7 +40,7 @@ export default function CardComponent({ card }) {
           {card.projectName}
         </h5>
         <p className="line-clamp-2 mb-3 font-normal text-justify text-gray-400 dark:text-gray-400">
-          {card.describtion}
+          {card.describtion || defaultDescription}
         </p>
 
         {/* progress bar */}
