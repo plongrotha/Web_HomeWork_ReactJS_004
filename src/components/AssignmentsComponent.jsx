@@ -7,7 +7,7 @@ export default function AssignmentsComponent() {
       <div className="flex justify-between items-center">
         {/* assignments  */}
         <h2 className="text-xl font-semibold">Assignments</h2>
-        <AddNewProjectComponent />
+        {/* <AddNewProjectComponent /> */}
       </div>
     </div>
   );

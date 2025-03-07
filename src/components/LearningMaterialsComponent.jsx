@@ -7,9 +7,9 @@ export default function LearningMaterialsComponent() {
   // create function to fill the star
 
   const [fill, setFill] = useState([]);
-  const [sortCriteria, setSortCriteria] = useState("A-Z");
+  const [sort, setSort] = useState("A-Z");
 
-  const handleStarClick = (id) => {
+  const clickStar = (id) => {
     setFill((prevFill) =>
       prevFill.includes(id)
         ? prevFill.filter((item) => item !== id)
@@ -17,14 +17,14 @@ export default function LearningMaterialsComponent() {
     );
   };
 
-  const handleSortChange = (criteria) => {
-    setSortCriteria(criteria);
+  const handleSortChange = (type) => {
+    setSort(type);
   };
 
   const sortedLearningMaterials = [...learningMaterials].sort((a, b) => {
-    if (sortCriteria === "A-Z") {
+    if (sort === "A-Z") {
       return a.title.localeCompare(b.title);
-    } else if (sortCriteria === "Z-A") {
+    } else if (sort === "Z-A") {
       return b.title.localeCompare(a.title);
     }
     return 0;
@@ -43,7 +43,7 @@ export default function LearningMaterialsComponent() {
 
       {/* materials list */}
       <div className="space-y-3 p-2">
-        {learningMaterials.map((learns) => (
+        {sortedLearningMaterials.map((learns) => (
           <div
             className="bg-light-gray px-4 py-2 flex gap-5 items-center"
             key={learns.id}
@@ -62,9 +62,9 @@ export default function LearningMaterialsComponent() {
                 <Star
                   size={20}
                   className="cursor:pointer"
-                  fill={fill.includes(learns.id) ? "yellow" : "none"}
-                  color={fill.includes(learns.id) ? "yellow" : "black"}
-                  onClick={() => handleStarClick(learns.id)}
+                  fill={fill.includes(learns.id) ? "#FAA300" : "none"}
+                  color={fill.includes(learns.id) ? "#FAA300" : "black"}
+                  onClick={() => clickStar(learns.id)}
                 />
               </div>
               <p className="text-gray-400 text-sm">{learns.postedAt}</p>

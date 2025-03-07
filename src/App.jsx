@@ -1,23 +1,21 @@
+import { useState } from "react";
 import "./App.css";
-import { dashboard } from "./data/dashboard";
 import AssignmentsComponent from "./components/AssignmentsComponent";
 import DashboardComponent from "./components/DashboardComponent";
-import FilterComponent from "./components/FilterComponent";
+import LearningMaterialsComponent from "./components/LearningMaterialsComponent";
 import SidebarComponent from "./components/SidebarComponent";
 import TopNavbarComponent from "./components/TopNavbarComponent";
-import LearningMaterialsComponent from "./components/LearningMaterialsComponent";
-
+import AddNewProjectComponent from "./components/AddNewProjectComponent";
+import CardComponent from "./components/CardComponent";
+import { Car } from "lucide-react";
 export default function App() {
-  // const EachDashBoard = dashboard.map((item) => {
-  //   return <DashboardComponent />;
-  // });
-
+  const [cards, setCards] = useState([]);
   return (
     <>
-      <div className="bg-gray-300 flex border-2">
+      <div className="bg-gray-300 flex ">
         <SidebarComponent />
         <div className="flex w-full justify-between">
-          <div className="w-full border-2 p-2">
+          <div className="w-full  p-2">
             <div className="items-center">
               <TopNavbarComponent />
             </div>
@@ -26,8 +24,15 @@ export default function App() {
               <div className="flex flex-2 p-2">
                 <div className="">
                   <DashboardComponent />
-                  <div className="mt-2">
+                  <div className="mt-2 flex justify-between">
                     <AssignmentsComponent />
+                    <AddNewProjectComponent setCards={setCards} />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-6 mt-6">
+                    {cards.map((card, i) => (
+                      <CardComponent key={i} card={card} />
+                    ))}
                   </div>
                 </div>
 
